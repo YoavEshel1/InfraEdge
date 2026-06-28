@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,12 +26,11 @@ import { Credentials } from '../../core/auth/models/credentials.model';
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
 
-  //states
-  readonly isLoading = signal(false);
-  readonly errorMessage = signal<string | null>(null);
+  //states — aliases to service signals (singleton, reset on each handleLogin call)
+  readonly isLoading = this.authService.loginIsLoading;
+  readonly errorMessage = this.authService.loginError;
   readonly passwordVisible = signal(false);
 
 
@@ -58,19 +56,6 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    const credentials: Credentials = this.form.value as Credentials;
-    this.isLoading.set(true);
-    this.errorMessage.set(null);
-
-    this.authService.login(credentials).subscribe({
-      next: () => {
-        this.isLoading.set(false);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err: Error) => {
-        this.isLoading.set(false);
-        this.errorMessage.set(err.message ?? 'שגיאה בהתחברות');
-      },
-    });
+    this.authService.handleLogin(this.form.value as Credentials);
   }
 }

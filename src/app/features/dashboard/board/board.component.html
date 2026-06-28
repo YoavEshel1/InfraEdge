@@ -3,24 +3,25 @@
   <!-- ── Header ─────────────────────────────────────────────────────────── -->
   <header class="board-header">
     <div class="header-start">
-      <div class="user-avatar" [title]="currentUser()?.name ?? ''">{{ userInitials }}</div>
-      <button mat-flat-button class="btn-new-task" (click)="openNewTaskDialog()">
-        <mat-icon>add</mat-icon>
-        משימה חדשה
+      <button mat-icon-button (click)="logout()" title="התנתק" aria-label="התנתק">
+        <mat-icon>logout</mat-icon>
       </button>
-    </div>
+      <span class="logo"><span class="logo-dot">•</span>stack</span>
+    </div>    
 
     <div class="header-center">
       <h1 class="board-title">לוח</h1>
       <p class="board-subtitle">{{ totalCount() }} משימות ב-3 עמודות</p>
     </div>
 
-    <div class="header-end">
-      <button mat-icon-button (click)="logout()" title="התנתק" aria-label="התנתק">
-        <mat-icon>logout</mat-icon>
+    <div class="header-end">      
+      <button mat-flat-button class="btn-new-task" (click)="openNewTaskDialog()">
+        <mat-icon>add</mat-icon>
+        משימה חדשה
       </button>
-      <span class="logo"><span class="logo-dot">•</span>stack</span>
+      <div class="user-avatar" [title]="currentUser()?.name ?? ''">{{ userInitials }}</div>
     </div>
+
   </header>
 
   <!-- ── Toolbar ────────────────────────────────────────────────────────── -->

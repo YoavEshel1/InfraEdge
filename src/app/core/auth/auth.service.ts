@@ -18,6 +18,26 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.currentUser() !== null);
   readonly token = computed(() => this.currentUser()?.token ?? null);
 
+  readonly loginIsLoading = signal(false);
+  readonly loginError = signal<string | null>(null);
+
+  //sets the loading state and error state and routes to dashboard on success
+  handleLogin(credentials: Credentials): void {
+    this.loginIsLoading.set(true);
+    this.loginError.set(null);
+    this.login(credentials).subscribe({
+      next: () => {
+        this.loginIsLoading.set(false);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err: Error) => {
+        this.loginIsLoading.set(false);
+        this.loginError.set(err.message ?? 'שגיאה בהתחברות');
+      },
+    });
+  }
+
+  //gets the user credentials from the server
   login(credentials: Credentials): Observable<User> {
     const { email, password } = credentials;
     return this.http
@@ -36,12 +56,15 @@ export class AuthService {
       );
   }
 
+  //clears the current user and removes it from local storage
   logout(): void {
     this.currentUser.set(null);
+    //not secured -cannot be used in production - just for demo purposes    
     localStorage.removeItem(STORAGE_KEY);
     this.router.navigate(['/login']);
   }
 
+  //loads the user from local storage if available
   private loadFromStorage(): User | null {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
