@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
@@ -6,8 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
-import { Priority, Task, TaskStatus } from '../../../core/models/task.model';
-import { TaskService } from '../../../core/services/task.service';
+import { Priority, Task, TaskStatus } from '../models/task.model';
+import { TaskService } from '../task.service';
 
 interface StatusOption {
   value: TaskStatus;
@@ -28,6 +28,7 @@ const PRIORITY_MAP: Record<Priority, PriorityConfig> = {
 @Component({
   selector: 'app-task-card',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgClass, MatButtonModule, MatDivider, MatFormFieldModule, MatIconModule, MatSelectModule],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss',

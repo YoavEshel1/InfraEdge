@@ -5,7 +5,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideRouter } from '@angular/router';
 
 import { AuthService } from './auth.service';
-import { User } from '../models/user.model';
+import { User } from './models/user.model';
 
 @Component({ standalone: true, template: '' })
 class LoginStubComponent {}

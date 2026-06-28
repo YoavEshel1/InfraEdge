@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,11 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
-import { Priority, Task, TaskStatus } from '../../../core/models/task.model';
-import { AuthService } from '../../../core/services/auth.service';
-import { TaskService } from '../../../core/services/task.service';
-import { TaskCardComponent } from '../task-card/task-card.component';
-import { TaskModalComponent } from '../task-modal/task-modal.component';
+import { Priority, Task, TaskStatus } from '../task/models/task.model';
+import { AuthService } from '../../../core/auth/auth.service';
+import { TaskService } from '../task/task.service';
+import { TaskCardComponent } from '../task/task-card/task-card.component';
+import { TaskModalComponent } from '../task/task-modal/task-modal.component';
 
 interface Column {
   status: TaskStatus;
@@ -27,6 +27,7 @@ interface PriorityFilter {
 @Component({
   selector: 'app-board',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FormsModule,
     MatButtonModule,

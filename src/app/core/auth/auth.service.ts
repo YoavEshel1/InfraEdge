@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { User } from '../models/user.model';
+import { User } from './models/user.model';
+import { Credentials } from './models/credentials.model';
 
 const STORAGE_KEY = 'currentUser';
 
@@ -17,7 +18,8 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.currentUser() !== null);
   readonly token = computed(() => this.currentUser()?.token ?? null);
 
-  login(email: string, password: string): Observable<User> {
+  login(credentials: Credentials): Observable<User> {
+    const { email, password } = credentials;
     return this.http
       .get<User[]>(`${environment.apiUrl}/users?email=${encodeURIComponent(email)}`)
       .pipe(
@@ -28,6 +30,7 @@ export class AuthService {
         }),
         tap((user) => {
           this.currentUser.set(user);
+          //not secured -cannot be used in production - just for demo purposesS
           localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
         }),
       );

@@ -4,8 +4,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { TaskService } from './task.service';
-import { AuthService } from './auth.service';
-import { Task } from '../models/task.model';
+import { AuthService } from '../../../core/auth/auth.service';
+import { Task } from './models/task.model';
 
 const MOCK_TASKS: Task[] = [
   { id: 1, title: 'Task 1', status: 'todo', priority: 'high', userId: 1 },
