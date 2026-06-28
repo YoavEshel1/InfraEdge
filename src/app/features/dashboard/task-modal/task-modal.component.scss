@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.priority-section {
+  margin-top: 8px;
+
+  .priority-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 8px;
+  }
+}
+
+mat-dialog-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px;
+  padding-inline-start: 0 !important;
+
+  .submit-btn {
+    background-color: #e84c1e !important;
+    color: #fff !important;
+    border-radius: 8px;
+
+    &:not(:disabled):hover { background-color: #d44419 !important; }
+  }
+
+  .api-hint {
+    margin-inline-start: auto;
+    font-size: 0.72rem;
+    color: #bbb;
+    font-family: monospace;
+  }
+}

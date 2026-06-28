@@ -1,0 +1,84 @@
+<div class="board-container">
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="board-header">
+    <div class="header-start">
+      <div class="user-avatar" [title]="currentUser()?.name ?? ''">{{ userInitials }}</div>
+      <button mat-flat-button class="btn-new-task" (click)="openNewTaskDialog()">
+        <mat-icon>add</mat-icon>
+        משימה חדשה
+      </button>
+    </div>
+
+    <div class="header-center">
+      <h1 class="board-title">לוח</h1>
+      <p class="board-subtitle">{{ totalCount() }} משימות ב-3 עמודות</p>
+    </div>
+
+    <div class="header-end">
+      <button mat-icon-button (click)="logout()" title="התנתק" aria-label="התנתק">
+        <mat-icon>logout</mat-icon>
+      </button>
+      <span class="logo"><span class="logo-dot">•</span>stack</span>
+    </div>
+  </header>
+
+  <!-- ── Toolbar ────────────────────────────────────────────────────────── -->
+  <div class="board-toolbar">
+    <div class="toolbar-start">
+      <span class="filter-label">עדיפות</span>
+      @for (f of priorityFilters; track f.value) {
+        <button
+          class="priority-btn"
+          [class.active]="priorityFilter() === f.value"
+          (click)="onPriorityFilter(f.value)"
+        >
+          @if (f.dotColor) {
+            <span class="filter-dot" [style.background-color]="f.dotColor"></span>
+          }
+          {{ f.label }}
+        </button>
+      }
+    </div>
+
+    <div class="toolbar-end">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          placeholder="חיפוש משימות..."
+          [ngModel]="searchQuery()"
+          (ngModelChange)="onSearchChange($event)"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- ── Kanban board ───────────────────────────────────────────────────── -->
+  <div class="kanban-board">
+    @for (col of columns; track col.status) {
+      @let colTasks = getTasksForStatus(col.status);
+      <div class="kanban-column">
+        <div class="column-header">
+          <div class="column-meta">
+            <span class="column-dot" [style.background-color]="col.dotColor"></span>
+            <span class="column-title">{{ col.label }}</span>
+            <span class="column-count">{{ colTasks.length }}</span>
+          </div>
+          <button mat-icon-button class="col-add-btn" (click)="openNewTaskDialog()" aria-label="הוסף משימה">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <div class="column-body">
+          @for (task of colTasks; track task.id) {
+            <app-task-card [task]="task" />
+          } @empty {
+            <div class="empty-column">אין משימות</div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+</div>

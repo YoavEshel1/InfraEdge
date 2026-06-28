@@ -1,0 +1,74 @@
+<div class="login-layout">
+  <!-- Form side — left column -->
+  <div class="login-form-side">
+    <div class="form-wrapper">
+      <h1>ברוך שובך</h1>
+      <p class="subtitle">התחבר למרחב העבודה שלך.</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>דוא"ל</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="alice@example.com" />
+          @if (form.controls.email.hasError('required') && form.controls.email.touched) {
+            <mat-error>שדה חובה</mat-error>
+          }
+          @if (form.controls.email.hasError('email') && form.controls.email.touched) {
+            <mat-error>כתובת אימייל לא תקינה</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>סיסמה</mat-label>
+          <input matInput formControlName="password" [type]="passwordType" />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="passwordVisible() ? 'הסתר סיסמה' : 'הצג סיסמה'"
+          >
+            <mat-icon>{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.controls.password.hasError('required') && form.controls.password.touched) {
+            <mat-error>שדה חובה</mat-error>
+          }
+        </mat-form-field>
+
+        @if (errorMessage()) {
+          <div class="error-message" role="alert">{{ errorMessage() }}</div>
+        }
+
+        <button mat-flat-button class="login-btn" type="submit" [disabled]="isLoading()">
+          @if (isLoading()) {
+            <mat-progress-spinner diameter="20" mode="indeterminate" />
+          } @else {
+            התחברות →
+          }
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Promo side — right column -->
+  <div class="login-promo-side">
+    <div class="logo">
+      <span class="logo-dot">•</span>stack
+    </div>
+    <div class="promo-content">
+      <p class="promo-label">ניהול משימות, פשוט</p>
+      <h2 class="promo-heading">
+        תכנן את העבודה.<br />
+        ואז <span class="highlight">בצע</span> אותה.
+      </h2>
+      <p class="promo-description">
+        לוח קטן וממוקד להעברת משימות מרעיון להשלמה. התחבר כדי להציץ.
+      </p>
+    </div>
+    <footer class="promo-footer">
+      <span>© Stack 2026</span>
+      <span class="separator">·</span>
+      <a href="#">תנאים</a>
+      <a href="#">פרטיות</a>
+    </footer>
+  </div>
+</div>

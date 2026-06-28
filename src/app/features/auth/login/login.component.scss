@@ -1,0 +1,142 @@
+// Grid layout keeps columns LTR-positioned while RTL text is inherited from <html dir="rtl">
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ─── Form side (left column) ─────────────────────────────────────────────────
+.login-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: #fff;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 340px;
+  text-align: right;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: #1a1a1a;
+  }
+
+  .subtitle {
+    color: #666;
+    margin: 0 0 32px;
+    font-size: 0.9rem;
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+}
+
+.login-btn {
+  width: 100%;
+  height: 48px;
+  background-color: #e84c1e !important;
+  color: #fff !important;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:not(:disabled):hover {
+    background-color: #d44419 !important;
+  }
+}
+
+// ─── Promo side (right column) ────────────────────────────────────────────────
+.login-promo-side {
+  background-color: #faf8f4;
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  text-align: right;
+
+  .logo {
+    align-self: flex-start; // sits at the left edge of this column
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+
+    .logo-dot {
+      color: #e84c1e;
+    }
+  }
+}
+
+.promo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .promo-label {
+    color: #e84c1e;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0 0 16px;
+  }
+
+  .promo-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1a1a1a;
+    margin: 0 0 20px;
+
+    .highlight {
+      color: #e84c1e;
+      font-weight: 800;
+    }
+  }
+
+  .promo-description {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.promo-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  color: #aaa;
+  font-size: 0.8rem;
+
+  a {
+    color: #aaa;
+    text-decoration: none;
+
+    &:hover {
+      color: #666;
+    }
+  }
+
+  .separator {
+    color: #ddd;
+  }
+}

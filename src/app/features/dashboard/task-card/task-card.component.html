@@ -1,0 +1,29 @@
+<div class="task-card" [attr.data-priority]="task().priority">
+  <!-- Header: title + priority badge -->
+  <div class="card-header">
+    <h3 class="task-title">{{ task().title }}</h3>
+    <span class="priority-badge" [ngClass]="priorityClass">{{ priorityLabel }}</span>
+  </div>
+
+  <mat-divider />
+
+  <!-- Footer: status selector + delete -->
+  <div class="card-footer">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="status-field">
+      <mat-select [value]="task().status" (selectionChange)="onStatusChange($event.value)">
+        @for (s of statuses; track s.value) {
+          <mat-option [value]="s.value">{{ s.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-icon-button
+      class="delete-btn"
+      (click)="onDelete()"
+      aria-label="מחק משימה"
+    >
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
+</div>

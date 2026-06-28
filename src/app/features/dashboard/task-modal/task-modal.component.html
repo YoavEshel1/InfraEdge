@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>משימה חדשה</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" id="task-form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>כותרת</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        placeholder="כתיבת README והערות ארכיטקטורה"
+        autocomplete="off"
+      />
+      @if (form.controls.title.hasError('required') && form.controls.title.touched) {
+        <mat-error>שדה חובה</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>סטטוס</mat-label>
+      <mat-select formControlName="status">
+        @for (s of statuses; track s.value) {
+          <mat-option [value]="s.value">{{ s.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="priority-section">
+      <label class="priority-label">עדיפות</label>
+      <mat-button-toggle-group formControlName="priority" aria-label="עדיפות">
+        <mat-button-toggle value="low">נמוכה</mat-button-toggle>
+        <mat-button-toggle value="medium">בינונית</mat-button-toggle>
+        <mat-button-toggle value="high">גבוהה</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-flat-button
+    class="submit-btn"
+    form="task-form"
+    type="submit"
+    (click)="onSubmit()"
+    [disabled]="form.invalid"
+  >
+    צור משימה
+  </button>
+  <button mat-stroked-button type="button" (click)="onCancel()">ביטול</button>
+  <span class="api-hint">POST /tasks</span>
+</mat-dialog-actions>
