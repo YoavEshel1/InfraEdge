@@ -1,5 +1,6 @@
 
 @use '@angular/material' as mat;
+@use 'styles/colors' as *;
 
 // ── Material 3 theme — deep-orange primary to match #E84C1E ──────────────────
 html {
@@ -15,15 +16,15 @@ html {
   ));
 
   // Token overrides to lock in the exact brand orange
-  --mat-sys-primary: #e84c1e;
-  --mat-sys-on-primary: #ffffff;
-  --mat-sys-primary-container: #ffddd5;
-  --mat-sys-on-primary-container: #3d0800;
+  --mat-sys-primary: #{$mat-primary};
+  --mat-sys-on-primary: #{$mat-on-primary};
+  --mat-sys-primary-container: #{$mat-primary-container};
+  --mat-sys-on-primary-container: #{$mat-on-primary-container};
 }
 
 body {
   color-scheme: light;
-  background-color: #faf8f4;
+  background-color: $brand-bg;
   color: var(--mat-sys-on-surface);
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
@@ -40,4 +41,4 @@ body {
 // ── Scrollbar (optional, Chrome/Edge) ─────────────────────────────────────────
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: $border-muted; border-radius: 3px; }

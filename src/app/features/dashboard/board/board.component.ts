@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,24 +12,14 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { TaskService } from '../task/task.service';
 import { TaskCardComponent } from '../task/task-card/task-card.component';
 import { TaskModalComponent } from '../task/task-modal/task-modal.component';
-
-interface Column {
-  status: TaskStatus;
-  label: string;
-  dotColor: string;
-}
-
-interface PriorityFilter {
-  value: Priority | 'all';
-  label: string;
-  dotColor?: string;
-}
+import { COLUMNS, PRIORITY_FILTERS } from './board-consts';
 
 @Component({
   selector: 'app-board',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    NgClass,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -51,18 +42,8 @@ export class BoardComponent implements OnInit {
   readonly totalCount = computed(() => this.taskService.tasks().length);
 
   // ── Static config ──────────────────────────────────────────────────────────
-  readonly columns: Column[] = [
-    { status: 'todo', label: 'לעשות', dotColor: '#e84c1e' },
-    { status: 'in-progress', label: 'בתהליך', dotColor: '#f59e0b' },
-    { status: 'done', label: 'הושלם', dotColor: '#22c55e' },
-  ];
-
-  readonly priorityFilters: PriorityFilter[] = [
-    { value: 'all', label: 'הכל' },
-    { value: 'high', label: 'גבוהה', dotColor: '#e84c1e' },
-    { value: 'medium', label: 'בינונית', dotColor: '#f59e0b' },
-    { value: 'low', label: 'נמוכה', dotColor: '#eab308' },
-  ];
+  readonly columns = COLUMNS;
+  readonly priorityFilters = PRIORITY_FILTERS;
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────
   ngOnInit(): void {

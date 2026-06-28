@@ -1,0 +1,47 @@
+// ─── Brand ────────────────────────────────────────────────────────────────────
+$brand-primary:       #e84c1e;
+$brand-primary-hover: #d44419;
+$brand-bg:            #faf8f4;
+
+// ─── Text ─────────────────────────────────────────────────────────────────────
+$text-default:     #1a1a1a;
+$text-secondary:   #666;
+$text-muted:       #aaa;
+$text-subtle:      #bbb;
+$text-placeholder: #777;
+
+// ─── Surfaces & borders ───────────────────────────────────────────────────────
+$surface-white:  #fff;
+$surface-avatar: #555;
+$border-default: #ebebeb;
+$border-muted:   #ddd;
+$border-faint:   #ccc;
+
+// ─── Error / danger ───────────────────────────────────────────────────────────
+$error-bg:     #fee2e2;
+$error-text:   #dc2626;
+$danger-hover: #ef4444;
+
+// ─── Priority — high ──────────────────────────────────────────────────────────
+$priority-high-border: $brand-primary;
+$priority-high-bg:     #fee2e2;
+$priority-high-text:   #991b1b;
+
+// ─── Priority — medium ────────────────────────────────────────────────────────
+$priority-medium-border: #f59e0b;
+$priority-medium-bg:     #fef3c7;
+$priority-medium-text:   #92400e;
+
+// ─── Status ───────────────────────────────────────────────────────────────────
+$status-done: #22c55e;
+
+// ─── Priority — low ───────────────────────────────────────────────────────────
+$priority-low-border: #eab308;
+$priority-low-bg:     #fefce8;
+$priority-low-text:   #854d0e;
+
+// ─── Material token overrides ─────────────────────────────────────────────────
+$mat-primary:              $brand-primary;
+$mat-on-primary:           $surface-white;
+$mat-primary-container:    #ffddd5;
+$mat-on-primary-container: #3d0800;

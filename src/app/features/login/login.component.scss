@@ -1,3 +1,5 @@
+@use 'styles/colors' as *;
+
 // Grid layout keeps columns LTR-positioned while RTL text is inherited from <html dir="rtl">
 .login-layout {
   display: grid;
@@ -11,7 +13,7 @@
     align-items: center;
     justify-content: center;
     padding: 48px;
-    background: #fff;
+    background: $surface-white;
 
     .form-wrapper {
       width: 100%;
@@ -22,11 +24,11 @@
         font-size: 2rem;
         font-weight: 600;
         margin: 0 0 8px;
-        color: #1a1a1a;
+        color: $text-default;
       }
 
       .subtitle {
-        color: #666;
+        color: $text-secondary;
         margin: 0 0 32px;
         font-size: 0.9rem;
       }
@@ -38,8 +40,8 @@
         }
 
         .error-message {
-          background: #fee2e2;
-          color: #dc2626;
+          background: $error-bg;
+          color: $error-text;
           padding: 10px 14px;
           border-radius: 8px;
           margin-bottom: 16px;
@@ -49,8 +51,8 @@
         .login-btn {
           width: 100%;
           height: 48px;
-          background-color: #e84c1e !important;
-          color: #fff !important;
+          background-color: $brand-primary !important;
+          color: $surface-white !important;
           font-size: 1rem;
           border-radius: 8px;
           margin-top: 8px;
@@ -60,7 +62,7 @@
           gap: 8px;
 
           &:not(:disabled):hover {
-            background-color: #d44419 !important;
+            background-color: $brand-primary-hover !important;
           }
         }
       }
@@ -69,7 +71,7 @@
 
   // ─── Promo side (right column) ─────────────────────────────────────────────
   .login-promo-side {
-    background-color: #faf8f4;
+    background-color: $brand-bg;
     display: flex;
     flex-direction: column;
     padding: 48px;
@@ -79,10 +81,10 @@
       align-self: flex-start; // sits at the left edge of this column
       font-size: 1.4rem;
       font-weight: 700;
-      color: #1a1a1a;
+      color: $text-default;
 
       .logo-dot {
-        color: #e84c1e;
+        color: $brand-primary;
       }
     }
 
@@ -93,7 +95,7 @@
       justify-content: center;
 
       .promo-label {
-        color: #e84c1e;
+        color: $brand-primary;
         font-size: 0.875rem;
         font-weight: 500;
         margin: 0 0 16px;
@@ -103,17 +105,17 @@
         font-size: 2.5rem;
         font-weight: 700;
         line-height: 1.25;
-        color: #1a1a1a;
+        color: $text-default;
         margin: 0 0 20px;
 
         .highlight {
-          color: #e84c1e;
+          color: $brand-primary;
           font-weight: 800;
         }
       }
 
       .promo-description {
-        color: #666;
+        color: $text-secondary;
         font-size: 1rem;
         line-height: 1.6;
         margin: 0;
@@ -124,20 +126,20 @@
       display: flex;
       gap: 12px;
       justify-content: flex-start;
-      color: #aaa;
+      color: $text-muted;
       font-size: 0.8rem;
 
       a {
-        color: #aaa;
+        color: $text-muted;
         text-decoration: none;
 
         &:hover {
-          color: #666;
+          color: $text-secondary;
         }
       }
 
       .separator {
-        color: #ddd;
+        color: $border-muted;
       }
     }
   }

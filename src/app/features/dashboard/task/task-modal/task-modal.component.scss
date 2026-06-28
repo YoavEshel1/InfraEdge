@@ -1,3 +1,5 @@
+@use 'styles/colors' as *;
+
 :host {
   display: block;
   text-align: right;
@@ -14,7 +16,7 @@
   .priority-label {
     display: block;
     font-size: 0.8rem;
-    color: #777;
+    color: $text-placeholder;
     margin-bottom: 8px;
   }
 }
@@ -26,17 +28,17 @@ mat-dialog-actions {
   padding-inline-start: 0 !important;
 
   .submit-btn {
-    background-color: #e84c1e !important;
-    color: #fff !important;
+    background-color: $brand-primary !important;
+    color: $surface-white !important;
     border-radius: 8px;
 
-    &:not(:disabled):hover { background-color: #d44419 !important; }
+    &:not(:disabled):hover { background-color: $brand-primary-hover !important; }
   }
 
   .api-hint {
     margin-inline-start: auto;
     font-size: 0.72rem;
-    color: #bbb;
+    color: $text-subtle;
     font-family: monospace;
   }
 }

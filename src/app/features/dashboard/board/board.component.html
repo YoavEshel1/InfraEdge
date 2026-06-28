@@ -34,8 +34,8 @@
           [class.active]="priorityFilter() === f.value"
           (click)="onPriorityFilter(f.value)"
         >
-          @if (f.dotColor) {
-            <span class="filter-dot" [style.background-color]="f.dotColor"></span>
+          @if (f.colorClass) {
+            <span class="filter-dot" [ngClass]="f.colorClass"></span>
           }
           {{ f.label }}
         </button>
@@ -62,7 +62,7 @@
       <div class="kanban-column">
         <div class="column-header">
           <div class="column-meta">
-            <span class="column-dot" [style.background-color]="col.dotColor"></span>
+            <span class="column-dot" [ngClass]="col.colorClass"></span>
             <span class="column-title">{{ col.label }}</span>
             <span class="column-count">{{ colTasks.length }}</span>
           </div>

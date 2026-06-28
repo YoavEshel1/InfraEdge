@@ -79,6 +79,5 @@
       "userId": "1",
       "id": "FAOep3dOMV8"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

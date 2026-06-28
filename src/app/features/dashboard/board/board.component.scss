@@ -1,6 +1,8 @@
+@use 'styles/colors' as *;
+
 .board-container {
   min-height: 100vh;
-  background-color: #faf8f4;
+  background-color: $brand-bg;
   display: flex;
   flex-direction: column;
 }
@@ -11,8 +13,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 28px;
-  background: #fff;
-  border-bottom: 1px solid #ebebeb;
+  background: $surface-white;
+  border-bottom: 1px solid $border-default;
 
   .header-start {
     display: flex;
@@ -24,8 +26,8 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #555;
-    color: #fff;
+    background: $surface-avatar;
+    color: $surface-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,15 +37,15 @@
   }
 
   .btn-new-task {
-    background-color: #e84c1e !important;
-    color: #fff !important;
+    background-color: $brand-primary !important;
+    color: $surface-white !important;
     border-radius: 8px;
     height: 38px;
     font-size: 0.875rem;
 
     mat-icon { font-size: 18px; }
 
-    &:hover { background-color: #d44419 !important; }
+    &:hover { background-color: $brand-primary-hover !important; }
   }
 
   .header-center {
@@ -53,12 +55,12 @@
       font-size: 1.1rem;
       font-weight: 700;
       margin: 0;
-      color: #1a1a1a;
+      color: $text-default;
     }
 
     .board-subtitle {
       font-size: 0.7rem;
-      color: #aaa;
+      color: $text-muted;
       margin: 0;
     }
   }
@@ -71,9 +73,9 @@
     .logo {
       font-size: 1.2rem;
       font-weight: 700;
-      color: #1a1a1a;
+      color: $text-default;
 
-      .logo-dot { color: #e84c1e; }
+      .logo-dot { color: $brand-primary; }
     }
   }
 }
@@ -196,6 +198,12 @@
     mat-icon { font-size: 16px; }
   }
 }
+
+// ─── Dot colour classes ──────────────────────────────────────────────────────────
+.dot-brand  { background-color: $brand-primary; }
+.dot-medium { background-color: $priority-medium-border; }
+.dot-done   { background-color: $status-done; }
+.dot-low    { background-color: $priority-low-border; }
 
 .column-body {
   display: flex;
