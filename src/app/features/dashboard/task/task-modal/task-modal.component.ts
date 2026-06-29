@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,11 +32,13 @@ interface StatusOption {
 })
 export class TaskModalComponent {
   private readonly dialogRef = inject(MatDialogRef<TaskModalComponent>);
+  // Injecting optional data passed to the dialog, which may include a default status for the new task
+  private readonly data = inject<{ status?: TaskStatus }>(MAT_DIALOG_DATA, { optional: true });
   private readonly fb = inject(FormBuilder);
 
   readonly form = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(2)]],
-    status: ['todo' as TaskStatus],
+    status: [(this.data?.status ?? 'todo') as TaskStatus],
     priority: ['medium' as Priority],
   });
 

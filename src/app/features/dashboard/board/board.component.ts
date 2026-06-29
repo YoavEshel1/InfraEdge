@@ -13,6 +13,7 @@ import { TaskService } from '../task/task.service';
 import { TaskCardComponent } from '../task/task-card/task-card.component';
 import { TaskModalComponent } from '../task/task-modal/task-modal.component';
 import { COLUMNS, PRIORITY_FILTERS } from './board-consts';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-board',
@@ -26,7 +27,8 @@ import { COLUMNS, PRIORITY_FILTERS } from './board-consts';
     MatIconModule,
     MatInputModule,
     TaskCardComponent,
-  ],
+    MatDividerModule
+],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -40,6 +42,9 @@ export class BoardComponent implements OnInit {
   readonly searchQuery = this.taskService.searchQuery;
   readonly priorityFilter = this.taskService.priorityFilter;
   readonly totalCount = computed(() => this.taskService.tasks().length);
+  readonly uniqueStatusCount = computed(() =>
+    new Set(this.taskService.tasks().map((t) => t.status)).size
+  );
 
   // ── Static config ──────────────────────────────────────────────────────────
   readonly columns = COLUMNS;
@@ -80,9 +85,9 @@ export class BoardComponent implements OnInit {
     this.taskService.priorityFilter.set(priority);
   }
 
-  openNewTaskDialog(): void {
+  openNewTaskDialog(status: TaskStatus = 'todo'): void {
     this.dialog
-      .open(TaskModalComponent, { width: '480px', direction: 'rtl' })
+      .open(TaskModalComponent, { width: '480px', direction: 'rtl', data: { status } })
       .afterClosed()
       .subscribe((result) => {
         if (!result) return;

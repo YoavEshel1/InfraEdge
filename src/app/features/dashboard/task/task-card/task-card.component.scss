@@ -13,11 +13,21 @@
   border-inline-start: 3px solid transparent;
   transition: box-shadow 0.15s;
 
-  &:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
 
-  &[data-priority='high']   { border-inline-start-color: $priority-high-border; }
-  &[data-priority='medium'] { border-inline-start-color: $priority-medium-border; }
-  &[data-priority='low']    { border-inline-start-color: $priority-low-border; }
+  &[data-priority='high'] {
+    border-inline-start-color: $priority-high-border;
+  }
+
+  &[data-priority='medium'] {
+    border-inline-start-color: $priority-medium-border;
+  }
+
+  &[data-priority='low'] {
+    border-inline-start-color: $priority-low-border;
+  }
 }
 
 .card-header {
@@ -40,9 +50,20 @@
   font-size: 0.72rem;
   font-weight: 500;
 
-  &.priority-high   { background: $priority-high-bg;   color: $priority-high-text; }
-  &.priority-medium { background: $priority-medium-bg; color: $priority-medium-text; }
-  &.priority-low    { background: $priority-low-bg;    color: $priority-low-text; }
+  &.priority-high {
+    background: $priority-high-bg;
+    color: $priority-high-text;
+  }
+
+  &.priority-medium {
+    background: $priority-medium-bg;
+    color: $priority-medium-text;
+  }
+
+  &.priority-low {
+    background: $priority-low-bg;
+    color: $priority-low-text;
+  }
 }
 
 // ─── Card footer ─────────────────────────────────────────────────────────────
@@ -62,10 +83,23 @@ mat-divider {
   min-width: 100px;
 
   ::ng-deep {
-    .mat-mdc-text-field-wrapper { padding: 0 8px; }
-    .mat-mdc-form-field-infix { padding: 4px 0 !important; min-height: unset; }
-    .mdc-notched-outline__leading,
-    .mdc-notched-outline__trailing { border-radius: 6px; }
+    .mat-mdc-text-field-wrapper {
+      padding: 0 8px;
+    }
+
+    .mat-mdc-form-field-infix {
+      padding: 4px 0 !important;
+      min-height: unset;
+      width: 80px;
+    }
+
+    .mdc-notched-outline__leading {
+      border-radius: 0 20px 20px 0;
+    }
+
+    .mdc-notched-outline__trailing {
+      border-radius: 10px 0 0 10px;
+    }
   }
 }
 
@@ -74,7 +108,11 @@ mat-divider {
   height: 30px;
   color: $border-faint;
 
-  mat-icon { font-size: 18px; }
+  mat-icon {
+    font-size: 18px;
+  }
 
-  &:hover { color: $danger-hover; }
+  &:hover {
+    color: $danger-hover;
+  }
 }

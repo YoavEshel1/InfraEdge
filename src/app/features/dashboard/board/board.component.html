@@ -1,4 +1,4 @@
-<div class="board-container">
+﻿<div class="board-container">
 
   <!-- ── Header ─────────────────────────────────────────────────────────── -->
   <header class="board-header">
@@ -6,15 +6,20 @@
       <button mat-icon-button (click)="logout()" title="התנתק" aria-label="התנתק">
         <mat-icon>logout</mat-icon>
       </button>
-      <span class="logo"><span class="logo-dot">•</span>stack</span>
-    </div>    
+      <div class="board-logo">
+        <div>stack</div>
+        <div class="logo-dot">•</div>
+      </div>
+      <mat-divider vertical style="height: 48px;"></mat-divider>
+      <div class="header-center">
+        <h1 class="board-title">לוח</h1>
+        <p class="board-subtitle">{{ totalCount() }} משימות ב-{{uniqueStatusCount()}} עמודות</p>
+      </div>
 
-    <div class="header-center">
-      <h1 class="board-title">לוח</h1>
-      <p class="board-subtitle">{{ totalCount() }} משימות ב-3 עמודות</p>
     </div>
 
-    <div class="header-end">      
+
+    <div class="header-end">
       <button mat-flat-button class="btn-new-task" (click)="openNewTaskDialog()">
         <mat-icon>add</mat-icon>
         משימה חדשה
@@ -29,28 +34,20 @@
     <div class="toolbar-start">
       <span class="filter-label">עדיפות</span>
       @for (f of priorityFilters; track f.value) {
-        <button
-          class="priority-btn"
-          [class.active]="priorityFilter() === f.value"
-          (click)="onPriorityFilter(f.value)"
-        >
-          @if (f.colorClass) {
-            <span class="filter-dot" [ngClass]="f.colorClass"></span>
-          }
-          {{ f.label }}
-        </button>
+      <button class="priority-btn" [class.active]="priorityFilter() === f.value" (click)="onPriorityFilter(f.value)">
+        @if (f.colorClass) {
+        <span class="filter-dot" [ngClass]="f.colorClass"></span>
+        }
+        {{ f.label }}
+      </button>
       }
     </div>
 
     <div class="toolbar-end">
-      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="search-field">
+      <mat-form-field appearance="outline" class="search-field">
         <mat-icon matPrefix>search</mat-icon>
-        <input
-          matInput
-          placeholder="חיפוש משימות..."
-          [ngModel]="searchQuery()"
-          (ngModelChange)="onSearchChange($event)"
-        />
+        <input matInput placeholder="חיפוש משימות..." dir="rtl" [ngModel]="searchQuery()"
+          (ngModelChange)="onSearchChange($event)" />
       </mat-form-field>
     </div>
   </div>
@@ -58,27 +55,27 @@
   <!-- ── Kanban board ───────────────────────────────────────────────────── -->
   <div class="kanban-board">
     @for (col of columns; track col.status) {
-      @let colTasks = getTasksForStatus(col.status);
-      <div class="kanban-column">
-        <div class="column-header">
-          <div class="column-meta">
-            <span class="column-dot" [ngClass]="col.colorClass"></span>
-            <span class="column-title">{{ col.label }}</span>
-            <span class="column-count">{{ colTasks.length }}</span>
-          </div>
-          <button mat-icon-button class="col-add-btn" (click)="openNewTaskDialog()" aria-label="הוסף משימה">
-            <mat-icon>add</mat-icon>
-          </button>
+    @let colTasks = getTasksForStatus(col.status);
+    <div class="kanban-column">
+      <div class="column-header">
+        <div class="column-meta">
+          <span class="column-dot" [ngClass]="col.colorClass"></span>
+          <span class="column-title">{{ col.label }}</span>
+          <span class="column-count">{{ colTasks.length }}</span>
         </div>
-
-        <div class="column-body">
-          @for (task of colTasks; track task.id) {
-            <app-task-card [task]="task" />
-          } @empty {
-            <div class="empty-column">אין משימות</div>
-          }
-        </div>
+        <button mat-icon-button class="add-icon-btn" aria-label="הוסף משימה" (click)="openNewTaskDialog(col.status)">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
+
+      <div class="column-body">
+        @for (task of colTasks; track task.id) {
+        <app-task-card [task]="task" />
+        } @empty {
+        <div class="empty-column">אין משימות</div>
+        }
+      </div>
+    </div>
     }
   </div>
 

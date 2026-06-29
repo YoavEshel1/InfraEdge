@@ -2,7 +2,7 @@
 
 .board-container {
   min-height: 100vh;
-  background-color: $brand-bg;
+  background-color: $surface-white;
   display: flex;
   flex-direction: column;
 }
@@ -27,7 +27,7 @@
     height: 38px;
     border-radius: 50%;
     background: $surface-avatar;
-    color: $surface-white;
+    color: $text-avatar;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,29 +37,34 @@
   }
 
   .btn-new-task {
-    background-color: $brand-primary !important;
-    color: $surface-white !important;
+    background-color: $brand-primary;
+    color: $surface-white;
     border-radius: 8px;
-    height: 38px;
+    height: 45px;
     font-size: 0.875rem;
 
-    mat-icon { font-size: 18px; }
+    mat-icon {
+      font-size: 18px;
+    }
 
-    &:hover { background-color: $brand-primary-hover !important; }
+    &:hover {
+      background-color: $brand-primary-hover;
+    }
   }
 
   .header-center {
     text-align: center;
 
     .board-title {
-      font-size: 1.1rem;
+      font-size: 2.1rem;
       font-weight: 700;
       margin: 0;
       color: $text-default;
+      font-family: 'Roboto';
     }
 
     .board-subtitle {
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       color: $text-muted;
       margin: 0;
     }
@@ -68,14 +73,22 @@
   .header-end {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 20px;
+  }
 
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: $text-default;
+  .board-logo {
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: 'Roboto';
+    color: $text-default;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-direction: row;
 
-      .logo-dot { color: $brand-primary; }
+
+    .logo-dot {
+      color: $brand-primary;
     }
   }
 }
@@ -95,7 +108,7 @@
     .filter-label {
       font-size: 0.8rem;
       color: #888;
-      font-weight: 500;
+      font-weight: 600;
       margin-inline-end: 4px;
     }
   }
@@ -113,8 +126,11 @@
     color: #444;
     transition: background 0.15s, border-color 0.15s;
     font-family: inherit;
+    font-size: 18px;
 
-    &:hover { border-color: #bbb; }
+    &:hover {
+      border-color: #bbb;
+    }
 
     &.active {
       background: #1a1a1a;
@@ -131,10 +147,121 @@
     }
   }
 
-  .search-field {
-    width: 220px;
 
-    mat-icon { font-size: 18px; color: #aaa; }
+}
+
+.search-field {
+  width: 100%;
+
+  /* fully rounded pill */
+  .mdc-notched-outline__leading {
+    border-radius: 40px 0 0 40px;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-radius: 0 40px 40px 0;
+  }
+
+  /* warm off-white border */
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #c8b89a !important;
+  }
+
+  /* off-white background */
+  .mat-mdc-form-field-flex {
+    background: #fffdfa;
+    border-radius: 40px;
+  }
+
+  input.mat-mdc-input-element {
+    direction: rtl;
+    text-align: right;
+    color: #5a4a36;
+
+    &::placeholder {
+      color: #a89880;
+    }
+  }
+
+  .mat-icon {
+    color: #a89880;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+
+:host ::ng-deep {
+  .search-field {
+    width: 100%;
+
+
+    .mat-mdc-form-field-infix {
+      min-height: 20px;
+    }
+
+    .mdc-text-field--outlined .mat-mdc-form-field-infix,
+    .mdc-text-field--no-label .mat-mdc-form-field-infix {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+
+
+    .mdc-notched-outline__leading {
+      border-radius: 0 20px 20px 0;
+    }
+
+    .mdc-notched-outline__trailing {
+      border-radius: 10px 0 0 10px;
+    }
+
+    // Border color at all states
+    .mdc-notched-outline .mdc-notched-outline__leading,
+    .mdc-notched-outline .mdc-notched-outline__notch,
+    .mdc-notched-outline .mdc-notched-outline__trailing {
+      border-color: #c8b89a !important;
+    }
+
+    &:hover .mdc-notched-outline__leading,
+    &:hover .mdc-notched-outline__notch,
+    &:hover .mdc-notched-outline__trailing,
+    &.mat-focused .mdc-notched-outline__leading,
+    &.mat-focused .mdc-notched-outline__notch,
+    &.mat-focused .mdc-notched-outline__trailing {
+      border-color: #c8b89a !important;
+    }
+
+    // Background
+    .mat-mdc-form-field-flex {
+      background: #fffdfa;
+      border-radius: 30px;
+    }
+
+    // RTL input
+    input.mat-mdc-input-element {
+      direction: rtl;
+      text-align: right;
+      color: #5a4a36;
+
+      &::placeholder {
+        color: #a89880;
+      }
+    }
+
+    // Icon
+    .mat-icon {
+      color: #a89880;
+    }
+
+    // Remove hint/error space below
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
   }
 }
 
@@ -152,6 +279,9 @@
 
 .kanban-column {
   min-width: 0;
+  background: $brand-bg;
+  border-radius: 20px;
+  padding: 20px;
 
   // Reset text direction for card content
   direction: rtl;
@@ -160,7 +290,7 @@
 .column-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 14px;
 
   .column-meta {
@@ -190,20 +320,62 @@
     }
   }
 
-  .col-add-btn {
-    width: 28px;
-    height: 28px;
-    color: #bbb;
 
-    mat-icon { font-size: 16px; }
+
+  .add-icon-btn {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+
+    // Suppress Material's built-in hover/ripple overlays
+    .mat-mdc-button-persistent-ripple,
+    .mat-mdc-button-ripple {
+      display: none;
+    }
+
+    .mat-icon {
+      position: relative;
+      z-index: 1; // keep icon above the circle
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 20px;
+    }
+
+    // The filled gray circle
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #e0e0e0;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
 // ─── Dot colour classes ──────────────────────────────────────────────────────────
-.dot-brand  { background-color: $brand-primary; }
-.dot-medium { background-color: $priority-medium-border; }
-.dot-done   { background-color: $status-done; }
-.dot-low    { background-color: $priority-low-border; }
+.dot-brand {
+  background-color: $brand-primary;
+}
+
+.dot-medium {
+  background-color: $priority-medium-border;
+}
+
+.dot-done {
+  background-color: $status-done;
+}
+
+.dot-low {
+  background-color: $priority-low-border;
+}
 
 .column-body {
   display: flex;
