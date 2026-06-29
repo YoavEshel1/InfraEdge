@@ -1,4 +1,4 @@
-<div class="task-card" [attr.data-priority]="task().priority">
+<div class="task-card" [ngClass]="priorityClass">
   <!-- Header: title + priority badge -->
   <div class="card-header">
     <h3 class="task-title">{{ task().title }}</h3>
@@ -11,8 +11,8 @@
   <div class="card-footer">
     <mat-form-field appearance="outline" subscriptSizing="dynamic" class="status-field">
       <mat-select [value]="task().status" (selectionChange)="onStatusChange($event.value)">
-        @for (s of statuses; track s.value) {
-        <mat-option [value]="s.value">{{ s.label }}</mat-option>
+        @for (s of statuses; track s.status) {
+        <mat-option [value]="s.status">{{ s.label }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

@@ -12,8 +12,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { TaskService } from '../task/task.service';
 import { TaskCardComponent } from '../task/task-card/task-card.component';
 import { TaskModalComponent } from '../task/task-modal/task-modal.component';
-import { COLUMNS } from '../task/task-consts';
-import { PRIORITY_FILTERS } from './board-consts';
+import { TASK_STATUS_VISUALS } from '../task/task-consts';
+import { PRIORITY_FILTERS } from '../task/task-consts';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
@@ -48,7 +48,7 @@ export class BoardComponent implements OnInit {
   );
 
   // ── Static config ──────────────────────────────────────────────────────────
-  readonly columns = COLUMNS;
+  readonly columns = TASK_STATUS_VISUALS;
   readonly priorityFilters = PRIORITY_FILTERS;
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────

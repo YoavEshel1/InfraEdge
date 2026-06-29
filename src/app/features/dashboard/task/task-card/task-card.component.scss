@@ -17,17 +17,9 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  &[data-priority='high'] {
-    border-inline-start-color: $priority-high-border;
-  }
-
-  &[data-priority='medium'] {
-    border-inline-start-color: $priority-medium-border;
-  }
-
-  &[data-priority='low'] {
-    border-inline-start-color: $priority-low-border;
-  }
+  &.priority-high   { border-inline-start-color: $priority-high-border; }
+  &.priority-medium { border-inline-start-color: $priority-medium-border; }
+  &.priority-low    { border-inline-start-color: $priority-low-border; }
 }
 
 .card-header {

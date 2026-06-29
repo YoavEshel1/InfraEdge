@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Priority, TaskStatus } from '../models/task.model';
-import { Column } from '../../board/models/column.model';
-import { COLUMNS } from '../task-consts';
+import { TaskStatusVisuals } from '../models/task-status-visuals.model';
+import { TASK_STATUS_VISUALS } from '../task-consts';
 
 @Component({
   selector: 'app-task-modal',
@@ -44,9 +44,9 @@ export class TaskModalComponent {
     priority: ['medium' as Priority],
   });
 
-  readonly statuses: Column[] = COLUMNS;
+  readonly statuses: TaskStatusVisuals[] = TASK_STATUS_VISUALS;
 
-  get selectedStatus(): Column | undefined {
+  get selectedStatus(): TaskStatusVisuals | undefined {
     return this.statuses.find((s) => s.status === this.form.controls.status.value);
   }
 

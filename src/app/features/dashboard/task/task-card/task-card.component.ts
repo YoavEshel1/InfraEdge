@@ -8,24 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Priority, Task, TaskStatus } from '../models/task.model';
+import { TaskStatusVisuals } from '../models/task-status-visuals.model';
+import { TaskPriorityVisuals } from '../models/task-priority-visuals.model';
 import { TaskService } from '../task.service';
 import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
-
-interface StatusOption {
-  value: TaskStatus;
-  label: string;
-}
-
-interface PriorityConfig {
-  label: string;
-  cssClass: string;
-}
-
-const PRIORITY_MAP: Record<Priority, PriorityConfig> = {
-  high: { label: 'גבוהה', cssClass: 'priority-high' },
-  medium: { label: 'בינונית', cssClass: 'priority-medium' },
-  low: { label: 'נמוכה', cssClass: 'priority-low' },
-};
+import { TASK_STATUS_VISUALS, PRIORITY_FILTERS } from '../task-consts';
 
 @Component({
   selector: 'app-task-card',
@@ -40,18 +27,18 @@ export class TaskCardComponent {
   private readonly taskService = inject(TaskService);
   private readonly dialog = inject(MatDialog);
 
-  readonly statuses: StatusOption[] = [
-    { value: 'todo', label: 'לעשות' },
-    { value: 'in-progress', label: 'בתהליך' },
-    { value: 'done', label: 'הושלם' },
-  ];
+  readonly statuses: TaskStatusVisuals[] = TASK_STATUS_VISUALS;
+
+  private get currentPriority(): TaskPriorityVisuals | undefined {
+    return PRIORITY_FILTERS.find((p) => p.value === this.task().priority);
+  }
 
   get priorityLabel(): string {
-    return PRIORITY_MAP[this.task().priority]?.label ?? this.task().priority;
+    return this.currentPriority?.label ?? this.task().priority;
   }
 
   get priorityClass(): string {
-    return PRIORITY_MAP[this.task().priority]?.cssClass ?? '';
+    return this.currentPriority?.borderClass ?? '';
   }
 
   onStatusChange(status: TaskStatus): void {

@@ -66,19 +66,27 @@ body {
   }
 
 
-  // tasks dot colors
-.dot-brand {
-  background-color: $brand-primary;
+  // status dots
+.status-todo-dot {
+  background-color: $priority-low-border;
 }
 
-.dot-medium {
+.status-inProcess-dot {
   background-color: $priority-medium-border;
 }
 
-.dot-done {
+.status-done-dot {
   background-color: $status-done;
 }
 
-.dot-low {
+
+//priority dots
+.priority-high-dot {
+  background-color: $brand-primary; 
+}
+.priority-medium-dot {
+  background-color: $priority-medium-border; 
+}
+.priority-low-dot {
   background-color: $priority-low-border;
 }
