@@ -346,22 +346,6 @@
   }
 }
 
-// ─── Dot colour classes ──────────────────────────────────────────────────────────
-.dot-brand {
-  background-color: $brand-primary;
-}
-
-.dot-medium {
-  background-color: $priority-medium-border;
-}
-
-.dot-done {
-  background-color: $status-done;
-}
-
-.dot-low {
-  background-color: $priority-low-border;
-}
 
 .column-body {
   display: flex;

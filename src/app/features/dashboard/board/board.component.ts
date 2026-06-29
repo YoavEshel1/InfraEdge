@@ -12,7 +12,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { TaskService } from '../task/task.service';
 import { TaskCardComponent } from '../task/task-card/task-card.component';
 import { TaskModalComponent } from '../task/task-modal/task-modal.component';
-import { COLUMNS, PRIORITY_FILTERS } from './board-consts';
+import { COLUMNS } from '../task/task-consts';
+import { PRIORITY_FILTERS } from './board-consts';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({

@@ -10,13 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Priority, TaskStatus } from '../models/task.model';
-import { MatIcon } from "@angular/material/icon";
-
-interface StatusOption {
-  value: TaskStatus;
-  label: string;
-  colorClass: string;
-}
+import { Column } from '../../board/models/column.model';
+import { COLUMNS } from '../task-consts';
 
 @Component({
   selector: 'app-task-modal',
@@ -32,8 +27,7 @@ interface StatusOption {
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    MatIcon
-],
+  ],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',
 })
@@ -50,14 +44,10 @@ export class TaskModalComponent {
     priority: ['medium' as Priority],
   });
 
-  readonly statuses: StatusOption[] = [
-    { value: 'todo',        label: 'לעשות',  colorClass: 'dot-brand' },
-    { value: 'in-progress', label: 'בתהליך', colorClass: 'dot-medium' },
-    { value: 'done',        label: 'הושלם',  colorClass: 'dot-low' },
-  ];
+  readonly statuses: Column[] = COLUMNS;
 
-  get selectedStatus(): StatusOption | undefined {
-    return this.statuses.find((s) => s.value === this.form.controls.status.value);
+  get selectedStatus(): Column | undefined {
+    return this.statuses.find((s) => s.status === this.form.controls.status.value);
   }
 
   onSubmit(): void {

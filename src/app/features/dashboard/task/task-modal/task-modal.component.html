@@ -40,8 +40,8 @@
             <span class="status-dot" [ngClass]="selectedStatus?.colorClass"></span>
             {{ selectedStatus?.label }}
           </mat-select-trigger>
-          @for (s of statuses; track s.value) {
-            <mat-option [value]="s.value">              
+          @for (s of statuses; track s.status) {
+            <mat-option [value]="s.status">              
               <span class="status-dot" [ngClass]="s.colorClass"></span>
               {{ s.label }}
             </mat-option>
