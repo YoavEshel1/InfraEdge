@@ -7,6 +7,7 @@ export interface Task {
   status: TaskStatus;
   priority: Priority;
   userId: number;
+  description?: string;
 }
 
 export type CreateTaskDto = Omit<Task, 'id'>;
