@@ -36,10 +36,13 @@
       <label class="field-label">סטטוס</label>
       <mat-form-field appearance="outline" class="full-width">
         <mat-select formControlName="status">
+          <mat-select-trigger>
+            <span class="status-dot" [ngClass]="selectedStatus?.colorClass"></span>
+            {{ selectedStatus?.label }}
+          </mat-select-trigger>
           @for (s of statuses; track s.value) {
-            <mat-option [value]="s.value">
-              <!-- todo:fix -->
-              <!-- <span class="status-dot" [style.background]="s.color"></span> -->
+            <mat-option [value]="s.value">              
+              <span class="status-dot" [ngClass]="s.colorClass"></span>
               {{ s.label }}
             </mat-option>
           }

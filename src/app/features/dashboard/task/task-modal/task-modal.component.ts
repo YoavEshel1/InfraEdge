@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -14,6 +15,7 @@ import { MatIcon } from "@angular/material/icon";
 interface StatusOption {
   value: TaskStatus;
   label: string;
+  colorClass: string;
 }
 
 @Component({
@@ -21,6 +23,7 @@ interface StatusOption {
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    NgClass,
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -48,10 +51,14 @@ export class TaskModalComponent {
   });
 
   readonly statuses: StatusOption[] = [
-    { value: 'todo', label: 'לעשות' },
-    { value: 'in-progress', label: 'בתהליך' },
-    { value: 'done', label: 'הושלם' },
+    { value: 'todo',        label: 'לעשות',  colorClass: 'dot-brand' },
+    { value: 'in-progress', label: 'בתהליך', colorClass: 'dot-medium' },
+    { value: 'done',        label: 'הושלם',  colorClass: 'dot-low' },
   ];
+
+  get selectedStatus(): StatusOption | undefined {
+    return this.statuses.find((s) => s.value === this.form.controls.status.value);
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {
