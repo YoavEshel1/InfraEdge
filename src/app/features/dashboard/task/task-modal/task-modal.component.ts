@@ -4,10 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Priority, TaskStatus } from '../models/task.model';
+import { MatIcon } from "@angular/material/icon";
 
 interface StatusOption {
   value: TaskStatus;
@@ -24,9 +26,11 @@ interface StatusOption {
     MatButtonToggleModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatSelectModule,
-  ],
+    MatIcon
+],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss',
 })
@@ -38,6 +42,7 @@ export class TaskModalComponent {
 
   readonly form = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(2)]],
+    description: [''],
     status: [(this.data?.status ?? 'todo') as TaskStatus],
     priority: ['medium' as Priority],
   });

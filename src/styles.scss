@@ -42,3 +42,9 @@ body {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: $border-muted; border-radius: 3px; }
+
+//dialogs
+.rounded-dialog .mat-mdc-dialog-container {
+  border-radius: 16px !important;
+  overflow: hidden;
+}

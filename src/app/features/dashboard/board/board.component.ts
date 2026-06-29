@@ -28,7 +28,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatInputModule,
     TaskCardComponent,
     MatDividerModule
-],
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -87,7 +87,12 @@ export class BoardComponent implements OnInit {
 
   openNewTaskDialog(status: TaskStatus = 'todo'): void {
     this.dialog
-      .open(TaskModalComponent, { width: '480px', direction: 'rtl', data: { status } })
+      .open(TaskModalComponent, {
+        width: '580px',
+        panelClass: 'rounded-dialog',
+        direction: 'rtl',
+        data: { status }
+      })
       .afterClosed()
       .subscribe((result) => {
         if (!result) return;

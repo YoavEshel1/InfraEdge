@@ -3,36 +3,207 @@
 :host {
   display: block;
   text-align: right;
+  direction: rtl;
+}
+
+// Close button — top left (visually, since RTL = top left is inline-start)
+.close-btn {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: $text-subtle;
+}
+
+// Title
+h2[mat-dialog-title] {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  padding-top: 8px;
+  margin-bottom: 0;
+}
+
+// Field groups — label above field
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.field-label {
+  font-size: 0.82rem;
+  color: $text-default;
+  margin-bottom: 4px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.optional {
+  color: $text-subtle;
+  font-size: 0.78rem;
 }
 
 .full-width {
   width: 100%;
-  margin-bottom: 4px;
 }
 
-.priority-section {
-  margin-top: 8px;
 
-  .priority-label {
-    display: block;
-    font-size: 0.8rem;
-    color: $text-placeholder;
-    margin-bottom: 8px;
+// Remove floating label — we use our own labels above
+:host ::ng-deep {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  //rouding corders of the input fields
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__leading {
+    border-radius: 0 10px 10px 0;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-radius: 10px 0 0 10px;
+  }
+
+  // Active/focus state — orange border
+  .mat-mdc-form-field.mat-focused {
+
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: $brand-primary;
+    }
+  }
+
+  // Input text RTL
+  input.mat-mdc-input-element,
+  textarea.mat-mdc-input-element {
+    direction: rtl;
+    text-align: right;
+  }
+
+  // Status dot inside mat-select trigger
+  .mat-mdc-select-trigger {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 8px;
+  }
+
+  // Priority toggle group — pill style
+  .mat-button-toggle-group {
+    border: none;
+    gap: 8px;
+    background: transparent;
+    box-shadow: none;
+    flex-direction: row-reverse;
+  }
+
+  .mat-button-toggle {
+    border: 1.5px solid #d4c9b8;
+    border-radius: 999px;
+    overflow: hidden;
+    background: transparent;
+
+    .mat-button-toggle-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      color: #3a2e1e;
+      flex-direction: row-reverse;
+    }
+
+    &.mat-button-toggle-checked {
+      background: #1a1a1a;
+      border-color: #1a1a1a;
+
+      .mat-button-toggle-button {
+        color: #fff;
+      }
+    }
+  }
+
+  // Remove default toggle dividers
+  .mat-button-toggle+.mat-button-toggle {
+    border-left: none;
   }
 }
 
+// Colored dots inside toggles
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &.dot-low {
+    background: #4caf7d;
+  }
+
+  &.dot-medium {
+    background: $brand-primary;
+  }
+
+  &.dot-high {
+    background: #e05a2b;
+  }
+}
+
+// Status dot in select
+.status-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+// Priority section spacing
+.priority-section {
+  margin-top: 4px;
+
+  .priority-toggle-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .toggle-btn {
+      :host ::ng-deep {
+        .mat-button-toggle .mat-button-toggle-button {
+          padding: 0 12px;
+        }
+      }
+    }
+  }
+}
+
+// Actions
 mat-dialog-actions {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
   gap: 10px;
-  padding-inline-start: 0 !important;
+  padding-inline-start: 0;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
 
   .submit-btn {
-    background-color: $brand-primary !important;
-    color: $surface-white !important;
-    border-radius: 8px;
+    background-color: $brand-primary;
+    color: $surface-white;
+    border-radius: 10px;
+    padding: 0 24px;
+    font-weight: 600;
 
-    &:not(:disabled):hover { background-color: $brand-primary-hover !important; }
+    &:not(:disabled):hover {
+      background-color: $brand-primary-hover;
+    }
+  }
+
+  .cancel-btn {
+    border-radius: 10px;
+    border-color: #d4c9b8;
+    color: $text-default;
+    font-weight: 600;
   }
 
   .api-hint {
@@ -41,4 +212,10 @@ mat-dialog-actions {
     color: $text-subtle;
     font-family: monospace;
   }
+}
+
+.mat-mdc-dialog-content{
+  border-bottom: 1px solid $border-default;
+  padding-bottom: 20px;
+  font-family: 'Roboto';
 }

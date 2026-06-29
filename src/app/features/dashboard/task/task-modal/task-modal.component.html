@@ -1,51 +1,78 @@
-<h2 mat-dialog-title>משימה חדשה</h2>
+<h2 mat-dialog-title>
+  משימה חדשה
+  <button class="close-btn" mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
 
-<mat-dialog-content>
+<mat-dialog-content >
   <form [formGroup]="form" id="task-form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>כותרת</mat-label>
-      <input
-        matInput
-        formControlName="title"
-        placeholder="כתיבת README והערות ארכיטקטורה"
-        autocomplete="off"
-      />
-      @if (form.controls.title.hasError('required') && form.controls.title.touched) {
-        <mat-error>שדה חובה</mat-error>
-      }
-    </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>סטטוס</mat-label>
-      <mat-select formControlName="status">
-        @for (s of statuses; track s.value) {
-          <mat-option [value]="s.value">{{ s.label }}</mat-option>
+    <!-- כותרת -->
+    <div class="field-group">
+      <label class="field-label">כותרת</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="title"
+               placeholder="כותרת המשימה"
+               autocomplete="off" />
+        @if (form.controls.title.hasError('required') && form.controls.title.touched) {
+          <mat-error>שדה חובה</mat-error>
         }
-      </mat-select>
-    </mat-form-field>
+      </mat-form-field>
+    </div>
 
-    <div class="priority-section">
-      <label class="priority-label">עדיפות</label>
-      <mat-button-toggle-group formControlName="priority" aria-label="עדיפות">
-        <mat-button-toggle value="low">נמוכה</mat-button-toggle>
-        <mat-button-toggle value="medium">בינונית</mat-button-toggle>
-        <mat-button-toggle value="high">גבוהה</mat-button-toggle>
+    <!-- תיאור -->
+    <div class="field-group">
+      <label class="field-label">תיאור <span class="optional">· אופציונלי</span></label>
+      <mat-form-field appearance="outline" class="full-width">
+        <textarea matInput formControlName="description" rows="4"
+                  placeholder="תיאור קצר של המשימה">
+        </textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- סטטוס -->
+    <div class="field-group">
+      <label class="field-label">סטטוס</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-select formControlName="status">
+          @for (s of statuses; track s.value) {
+            <mat-option [value]="s.value">
+              <!-- todo:fix -->
+              <!-- <span class="status-dot" [style.background]="s.color"></span> -->
+              {{ s.label }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- עדיפות -->
+    <div class="field-group priority-section">
+      <label class="field-label">עדיפות</label>
+      <mat-button-toggle-group formControlName="priority"
+      class="priority-toggle-group" aria-label="עדיפות">
+        <mat-button-toggle value="low" class="toggle-btn">
+          <span class="dot dot-low" ></span>נמוכה
+        </mat-button-toggle>
+        <mat-button-toggle value="medium" class="toggle-btn">
+          <span class="dot dot-medium"></span>בינונית
+        </mat-button-toggle>
+        <mat-button-toggle value="high" class="toggle-btn">
+          <span class="dot dot-high"></span>גבוהה
+        </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
+
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button
-    mat-flat-button
-    class="submit-btn"
-    form="task-form"
-    type="submit"
-    (click)="onSubmit()"
-    [disabled]="form.invalid"
-  >
+  <button mat-flat-button class="submit-btn"
+          form="task-form" type="submit"
+          (click)="onSubmit()" [disabled]="form.invalid">
     צור משימה
   </button>
-  <button mat-stroked-button type="button" (click)="onCancel()">ביטול</button>
-  <span class="api-hint">POST /tasks</span>
+  <button mat-stroked-button class="cancel-btn" type="button" (click)="onCancel()">ביטול</button>
+ 
 </mat-dialog-actions>
