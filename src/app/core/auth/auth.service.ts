@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   //gets the user credentials from the server
-  login(credentials: Credentials): Observable<User> {
+  private login(credentials: Credentials): Observable<User> {
     const { email, password } = credentials;
     return this.http
       .get<User[]>(`${environment.apiUrl}/users?email=${encodeURIComponent(email)}`)

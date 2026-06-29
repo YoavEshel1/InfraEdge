@@ -7,9 +7,12 @@ import { provideRouter } from '@angular/router';
 import { AuthService } from './auth.service';
 import { User } from './models/user.model';
 
-// Minimal stub needed by provideRouter — used as the '/login' redirect target in logout tests
+// Minimal stubs needed by provideRouter — used as redirect targets in tests
 @Component({ standalone: true, template: '' })
 class LoginStubComponent {}
+
+@Component({ standalone: true, template: '' })
+class DashboardStubComponent {}
 
 // Shared mock user fixture used across all test cases
 const MOCK_USER: User = {
@@ -29,7 +32,7 @@ describe('AuthService', () => {
     localStorage.clear();
     TestBed.configureTestingModule({
       // Real HttpClient paired with the in-memory testing controller for request interception
-      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([{ path: 'login', component: LoginStubComponent }])],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([{ path: 'login', component: LoginStubComponent }, { path: 'dashboard', component: DashboardStubComponent }])],
     });
     service = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -57,7 +60,7 @@ describe('AuthService', () => {
     localStorage.setItem('currentUser', JSON.stringify(MOCK_USER));
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([{ path: 'login', component: LoginStubComponent }])],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([{ path: 'login', component: LoginStubComponent }, { path: 'dashboard', component: DashboardStubComponent }])],
     });
     // Fresh instance reads from localStorage in its constructor — session should be restored
     const fresh = TestBed.inject(AuthService);
@@ -66,44 +69,41 @@ describe('AuthService', () => {
     expect(fresh.token()).toBe(MOCK_USER.token);
   });
 
-  describe('login()', () => {
+  describe('handleLogin()', () => {
     it('should set currentUser signal and persist to localStorage on success', () => {
-      // Arrange: subscribe to capture the emitted User
-      let result: User | undefined;
-      service.login({ email: 'alice@example.com', password: 'alice123' }).subscribe((user) => (result = user));
+      service.handleLogin({ email: 'alice@example.com', password: 'alice123' });
+
+      // While waiting for the HTTP response, loading should be active
+      expect(service.loginIsLoading()).toBe(true);
 
       // Act: resolve the pending HTTP request with a matching user
       httpMock.expectOne('/api/users?email=alice%40example.com').flush([MOCK_USER]);
 
-      // Assert: returned value, signals, and localStorage are all updated
-      expect(result).toEqual(MOCK_USER);
+      // Assert: signals and localStorage are all updated
       expect(service.currentUser()).toEqual(MOCK_USER);
       expect(service.isAuthenticated()).toBe(true);
       expect(service.token()).toBe(MOCK_USER.token);
+      expect(service.loginIsLoading()).toBe(false);
       expect(localStorage.getItem('currentUser')).toBe(JSON.stringify(MOCK_USER));
     });
 
-    it('should throw "אימייל או סיסמה שגויים" when password does not match', () => {
+    it('should set loginError when password does not match', () => {
       // Server returns the user but the client-side password comparison fails in the map operator
-      let caughtError: Error | undefined;
-      service.login({ email: 'alice@example.com', password: 'wrongpassword' }).subscribe({
-        error: (err: Error) => (caughtError = err),
-      });
+      service.handleLogin({ email: 'alice@example.com', password: 'wrongpassword' });
       httpMock.expectOne('/api/users?email=alice%40example.com').flush([MOCK_USER]);
 
-      expect(caughtError?.message).toBe('אימייל או סיסמה שגויים');
+      expect(service.loginError()).toBe('אימייל או סיסמה שגויים');
       expect(service.isAuthenticated()).toBe(false);
+      expect(service.loginIsLoading()).toBe(false);
     });
 
-    it('should throw when no user matches the email', () => {
+    it('should set loginError when no user matches the email', () => {
       // Server returns an empty array — no account exists for this email
-      let caughtError: Error | undefined;
-      service.login({ email: 'unknown@example.com', password: 'pass' }).subscribe({
-        error: (err: Error) => (caughtError = err),
-      });
+      service.handleLogin({ email: 'unknown@example.com', password: 'pass' });
       httpMock.expectOne('/api/users?email=unknown%40example.com').flush([]);
 
-      expect(caughtError?.message).toBe('אימייל או סיסמה שגויים');
+      expect(service.loginError()).toBe('אימייל או סיסמה שגויים');
+      expect(service.loginIsLoading()).toBe(false);
     });
   });
 

@@ -1,8 +1,8 @@
-<div class="task-card" [ngClass]="priorityClass">
+<div class="task-card" [ngClass]="priorityClass()">
   <!-- Header: title + priority badge -->
   <div class="card-header">
     <h3 class="task-title">{{ task().title }}</h3>
-    <span class="priority-badge" [ngClass]="priorityClass">{{ priorityLabel }}</span>
+    <span class="priority-badge" [ngClass]="priorityClass()">{{ priorityLabel() }}</span>
   </div>
 
   <mat-divider />
