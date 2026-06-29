@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { Priority, Task, TaskStatus } from '../models/task.model';
 import { TaskService } from '../task.service';
+import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 interface StatusOption {
   value: TaskStatus;
@@ -36,6 +38,7 @@ const PRIORITY_MAP: Record<Priority, PriorityConfig> = {
 export class TaskCardComponent {
   readonly task = input.required<Task>();
   private readonly taskService = inject(TaskService);
+  private readonly dialog = inject(MatDialog);
 
   readonly statuses: StatusOption[] = [
     { value: 'todo', label: 'לעשות' },
@@ -56,6 +59,15 @@ export class TaskCardComponent {
   }
 
   onDelete(): void {
-    this.taskService.deleteTask(this.task().id).subscribe();
+    this.dialog
+      .open(ConfirmDialogComponent, {
+        width: '360px',
+        direction: 'rtl',
+        data: { title: 'מחיקת משימה', message: `האם למחוק את "${this.task().title}"?`, confirmLabel: 'מחק' },
+      })
+      .afterClosed()
+      .subscribe((confirmed) => {
+        if (confirmed) this.taskService.deleteTask(this.task().id).subscribe();
+      });
   }
 }

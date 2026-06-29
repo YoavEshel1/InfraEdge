@@ -101,18 +101,17 @@ mat-divider {
       border-radius: 10px 0 0 10px;
     }
   }
-}
+}   
 
 .delete-btn {
+  color: $border-faint;
+  transition: color 200ms ease;
   width: 30px;
   height: 30px;
-  color: $border-faint;
 
-  mat-icon {
-    font-size: 18px;
-  }
+  &:hover { color: $danger-hover; }
 
-  &:hover {
-    color: $danger-hover;
-  }
+  // Remove the Material ripple circle on hover
+  ::ng-deep .mat-mdc-button-persistent-ripple,
+  ::ng-deep .mat-ripple { display: none; }
 }

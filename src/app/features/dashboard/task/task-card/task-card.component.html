@@ -12,18 +12,14 @@
     <mat-form-field appearance="outline" subscriptSizing="dynamic" class="status-field">
       <mat-select [value]="task().status" (selectionChange)="onStatusChange($event.value)">
         @for (s of statuses; track s.value) {
-          <mat-option [value]="s.value">{{ s.label }}</mat-option>
+        <mat-option [value]="s.value">{{ s.label }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
-    <button
-      mat-icon-button
-      class="delete-btn"
-      (click)="onDelete()"
-      aria-label="מחק משימה"
-    >
-      <mat-icon>delete_outline</mat-icon>
+    <button mat-icon-button class="delete-btn" 
+    matTooltip="מחק משימה" (click)="onDelete()" aria-label="מחק משימה">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
 </div>
