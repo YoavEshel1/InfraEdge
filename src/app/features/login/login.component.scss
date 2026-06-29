@@ -76,6 +76,7 @@
     flex-direction: column;
     padding: 48px;
     text-align: right;
+    font-family: 'Roboto';
 
     .logo {
       align-self: flex-start; // sits at the left edge of this column
@@ -102,15 +103,15 @@
       }
 
       .promo-heading {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 4rem;
+        font-weight: 500;
         line-height: 1.25;
         color: $text-default;
         margin: 0 0 20px;
 
         .highlight {
           color: $brand-primary;
-          font-weight: 800;
+          font-weight: 600;
         }
       }
 
