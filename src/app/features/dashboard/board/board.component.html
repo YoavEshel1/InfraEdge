@@ -1,4 +1,4 @@
-﻿<div class="board-container">
+<div class="board-container">
 
   <!-- ── Header ─────────────────────────────────────────────────────────── -->
   <header class="board-header">
@@ -6,7 +6,7 @@
       <button mat-icon-button (click)="logout()" title="התנתק" aria-label="התנתק">
         <mat-icon>logout</mat-icon>
       </button>
-      <div class="board-logo">
+      <div class="app-logo">
         <div>stack</div>
         <div class="logo-dot">•</div>
       </div>
@@ -63,7 +63,8 @@
           <span class="column-title">{{ col.label }}</span>
           <span class="column-count">{{ colTasks.length }}</span>
         </div>
-        <button mat-icon-button class="add-icon-btn" aria-label="הוסף משימה" (click)="openNewTaskDialog(col.status)">
+        <button mat-icon-button class="add-icon-btn" aria-label="הוסף משימה"
+         (click)="openNewTaskDialog(col.status)">
           <mat-icon>add</mat-icon>
         </button>
       </div>

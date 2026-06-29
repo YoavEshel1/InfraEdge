@@ -48,3 +48,19 @@ body {
   border-radius: 16px !important;
   overflow: hidden;
 }
+
+.app-logo {
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: 'Roboto';
+    color: $text-default;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-direction: row;
+
+
+    .logo-dot {
+      color: $brand-primary;
+    }
+  }

@@ -76,21 +76,7 @@
     gap: 20px;
   }
 
-  .board-logo {
-    font-size: 1.8rem;
-    font-weight: 500;
-    font-family: 'Roboto';
-    color: $text-default;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    flex-direction: row;
-
-
-    .logo-dot {
-      color: $brand-primary;
-    }
-  }
+ 
 }
 
 // ─── Toolbar ─────────────────────────────────────────────────────────────────
@@ -314,7 +300,7 @@
     .column-count {
       background: #efefef;
       border-radius: 10px;
-      padding: 1px 8px;
+      padding: 4px 8px ;
       font-size: 0.75rem;
       color: #777;
     }
