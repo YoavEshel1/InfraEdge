@@ -6,8 +6,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-
-import { Priority, Task, TaskStatus } from '../models/task.model';
+import { Task, TaskStatus } from '../models/task.model';
 import { TaskStatusVisuals } from '../models/task-status-visuals.model';
 import { TaskPriorityVisuals } from '../models/task-priority-visuals.model';
 import { TaskService } from '../task.service';
