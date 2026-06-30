@@ -2,58 +2,52 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
 
-## Development server
+# Project Setup
 
-To start a local development server, run:
+## Running the Server
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To start the server, run:
 
 ```bash
-ng generate component component-name
+npm run server
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The server configuration and port are defined in `package.json`.
+
+---
+
+## Running the Client
+
+To start the client application, run:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+---
 
-To build the project run:
+# Notes
 
-```bash
-ng build
-```
+The application was inspired by the reference images that were provided.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Due to the available time, there are a few features shown in the reference images that were not implemented, along with several smaller UI refinements.
 
-## Running unit tests
+The styling is also only partially organized. While the color palette has been unified, the following improvements are still pending:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Consistent typography
+- Shared styling for common controls
+- Centralized spacing (padding and margins)
+- Additional UI polish and layout refinements
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+# Technical Notes
 
-For end-to-end (e2e) testing, run:
+The project uses a proxy configuration to enable shorter API URLs.
 
-```bash
-ng e2e
-```
+It also includes:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- HTTP interceptors
+- Route authentication guards
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+These were implemented even though the mock authentication server does not fully follow security best practices.
