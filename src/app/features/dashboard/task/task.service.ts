@@ -50,7 +50,7 @@ export class TaskService {
       .pipe(tap((created) => this.tasks.update((list) => [...list, created])));
   }
 
-  updateTask(id: number, changes: Partial<Pick<Task, 'status' | 'title' | 'priority'>>): Observable<Task> {
+  updateTask(id: number | string, changes: Partial<Pick<Task, 'status' | 'title' | 'priority'>>): Observable<Task> {
     return this.http
       .patch<Task>(`${environment.apiUrl}/tasks/${id}`, changes)
       .pipe(
@@ -60,7 +60,7 @@ export class TaskService {
       );
   }
 
-  deleteTask(id: number): Observable<void> {
+  deleteTask(id: number | string): Observable<void> {
     return this.http
       .delete<void>(`${environment.apiUrl}/tasks/${id}`)
       .pipe(tap(() => this.tasks.update((list) => list.filter((t) => t.id !== id))));
