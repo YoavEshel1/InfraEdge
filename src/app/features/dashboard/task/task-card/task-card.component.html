@@ -5,6 +5,10 @@
     <span class="priority-badge" [ngClass]="priorityClass()">{{ priorityLabel() }}</span>
   </div>
 
+  @if (task().description) {
+  <p class="task-description">{{ task().description }}</p>
+  }
+
   <mat-divider />
 
   <!-- Footer: status selector + delete -->

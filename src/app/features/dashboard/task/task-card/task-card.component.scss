@@ -37,6 +37,16 @@
   }
 }
 
+.task-description {
+  font-size: 0.78rem;
+  color: $text-warm-muted;
+  margin: 0 0 10px;
+  line-height: 1.4;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 // ─── Priority badge ───────────────────────────────────────────────────────────
 .priority-badge {
   display: inline-block;
