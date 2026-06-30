@@ -46,3 +46,23 @@ $mat-primary:              $brand-primary;
 $mat-on-primary:           $surface-white;
 $mat-primary-container:    #ffddd5;
 $mat-on-primary-container: #3d0800;
+
+// ─── Shadows ──────────────────────────────────────────────────────────────────
+$shadow-card:       rgba(0, 0, 0, 0.07);
+$shadow-card-hover: rgba(0, 0, 0, 0.1);
+
+// ─── Extended text ────────────────────────────────────────────────────────────
+$text-label:     #888;   // toolbar / section labels
+$text-body:      #444;   // default body text in buttons
+$text-warm:      #5a4a36; // warm emphasis text (search field, active states)
+$text-warm-muted: #a89880; // warm muted text and icons
+$text-warm-dark:  #3a2e1e; // dark warm text (toggle buttons)
+
+// ─── Extended surfaces & borders ──────────────────────────────────────────────
+$surface-muted:      #efefef;  // column count badge background
+$surface-warm-light: #fffdfa;  // warm off-white (search field, active btn bg)
+$border-warm:        #c8b89a;  // warm-toned border (search, priority buttons)
+$border-warm-light:  #d4c9b8;  // lighter warm border (toggle buttons, modal)
+$border-column-empty: #e8e8e8; // dashed border on empty kanban columns
+$icon-default:   rgba(0, 0, 0, 0.45); // icon fill on dark backgrounds
+$surface-hover:  #e0e0e0;             // hover circle on icon buttons

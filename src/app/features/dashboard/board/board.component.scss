@@ -93,7 +93,7 @@
 
     .filter-label {
       font-size: 0.8rem;
-      color: #888;
+      color: $text-label;
       font-weight: 600;
       margin-inline-end: 4px;
     }
@@ -104,24 +104,24 @@
     align-items: center;
     gap: 5px;
     padding: 5px 12px;
-    border: 1px solid #ddd;
+    border: 1px solid $border-muted;
     border-radius: 16px;
-    background: #fff;
+    background: $surface-white;
     cursor: pointer;
     font-size: 0.8rem;
-    color: #444;
+    color: $text-body;
     transition: background 0.15s, border-color 0.15s;
     font-family: inherit;
     font-size: 18px;
 
     &:hover {
-      border-color: #bbb;
+      border-color: $text-subtle;
     }
 
     &.active {
-      background: #1a1a1a;
-      color: #fff;
-      border-color: #1a1a1a;
+      background: $text-default;
+      color: $surface-white;
+      border-color: $text-default;
     }
 
     .filter-dot {
@@ -152,27 +152,27 @@
   .mdc-notched-outline__leading,
   .mdc-notched-outline__notch,
   .mdc-notched-outline__trailing {
-    border-color: #c8b89a !important;
+    border-color: $border-warm !important;
   }
 
   /* off-white background */
   .mat-mdc-form-field-flex {
-    background: #fffdfa;
+    background: $surface-warm-light;
     border-radius: 40px;
   }
 
   input.mat-mdc-input-element {
     direction: rtl;
     text-align: right;
-    color: #5a4a36;
+    color: $text-warm;
 
     &::placeholder {
-      color: #a89880;
+      color: $text-warm-muted;
     }
   }
 
   .mat-icon {
-    color: #a89880;
+    color: $text-warm-muted;
   }
 
   .mat-mdc-form-field-subscript-wrapper {
@@ -210,7 +210,7 @@
     .mdc-notched-outline .mdc-notched-outline__leading,
     .mdc-notched-outline .mdc-notched-outline__notch,
     .mdc-notched-outline .mdc-notched-outline__trailing {
-      border-color: #c8b89a !important;
+      border-color: $border-warm !important;
     }
 
     &:hover .mdc-notched-outline__leading,
@@ -219,12 +219,12 @@
     &.mat-focused .mdc-notched-outline__leading,
     &.mat-focused .mdc-notched-outline__notch,
     &.mat-focused .mdc-notched-outline__trailing {
-      border-color: #c8b89a !important;
+      border-color: $border-warm !important;
     }
 
     // Background
     .mat-mdc-form-field-flex {
-      background: #fffdfa;
+      background: $surface-warm-light;
       border-radius: 30px;
     }
 
@@ -232,16 +232,16 @@
     input.mat-mdc-input-element {
       direction: rtl;
       text-align: right;
-      color: #5a4a36;
+      color: $text-warm;
 
       &::placeholder {
-        color: #a89880;
+        color: $text-warm-muted;
       }
     }
 
     // Icon
     .mat-icon {
-      color: #a89880;
+      color: $text-warm-muted;
     }
 
     // Remove hint/error space below
@@ -294,15 +294,15 @@
     .column-title {
       font-weight: 600;
       font-size: 0.85rem;
-      color: #1a1a1a;
+      color: $text-default;
     }
 
     .column-count {
-      background: #efefef;
+      background: $surface-muted;
       border-radius: 10px;
       padding: 4px 8px ;
       font-size: 0.75rem;
-      color: #777;
+      color: $text-placeholder;
     }
   }
 
@@ -323,7 +323,7 @@
     .mat-icon {
       position: relative;
       z-index: 1; // keep icon above the circle
-      color: rgba(0, 0, 0, 0.45);
+      color: $icon-default;
       font-size: 20px;
     }
 
@@ -333,7 +333,7 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: #e0e0e0;
+      background: $surface-hover;
       opacity: 0;
       transform: scale(0.7);
       transition: opacity 180ms ease, transform 180ms ease;
@@ -356,8 +356,8 @@
 .empty-column {
   padding: 20px;
   text-align: center;
-  color: #ccc;
+  color: $border-faint;
   font-size: 0.8rem;
-  border: 1.5px dashed #e8e8e8;
+  border: 1.5px dashed $border-column-empty;
   border-radius: 8px;
 }

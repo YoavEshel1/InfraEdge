@@ -8,13 +8,13 @@
   background: $surface-white;
   border-radius: 8px;
   padding: 14px 16px 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 3px $shadow-card;
   // Priority indicator on the inline-start edge (right in RTL)
   border-inline-start: 3px solid transparent;
   transition: box-shadow 0.15s;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px $shadow-card-hover;
   }
 
   &.priority-high   { border-inline-start-color: $priority-high-border; }
@@ -28,7 +28,7 @@
   .task-title {
     font-size: 0.875rem;
     font-weight: 500;
-    color: #1a1a1a;
+    color: $text-default;
     margin: 0 0 8px;
     line-height: 1.4;
     overflow: hidden;
