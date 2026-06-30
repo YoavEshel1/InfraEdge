@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-import { Priority, TaskStatus } from '../models/task.model';
+import { Priority, Task, TaskStatus } from '../models/task.model';
 import { TaskStatusVisuals } from '../models/task-status-visuals.model';
 import { TASK_STATUS_VISUALS } from '../task-consts';
 
@@ -33,15 +33,16 @@ import { TASK_STATUS_VISUALS } from '../task-consts';
 })
 export class TaskModalComponent {
   private readonly dialogRef = inject(MatDialogRef<TaskModalComponent>);
-  // Injecting optional data passed to the dialog, which may include a default status for the new task
-  private readonly data = inject<{ status?: TaskStatus }>(MAT_DIALOG_DATA, { optional: true });
+  private readonly data = inject<{ status?: TaskStatus; task?: Task }>(MAT_DIALOG_DATA, { optional: true });
   private readonly fb = inject(FormBuilder);
 
+  readonly isEditMode = !!this.data?.task;
+
   readonly form = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(2)]],
-    description: [''],
-    status: [(this.data?.status ?? 'todo') as TaskStatus],
-    priority: ['medium' as Priority],
+    title:       [this.data?.task?.title       ?? '',        [Validators.required, Validators.minLength(2)]],
+    description: [this.data?.task?.description ?? ''],
+    status:      [(this.data?.task?.status     ?? this.data?.status ?? 'todo') as TaskStatus],
+    priority:    [(this.data?.task?.priority   ?? 'medium') as Priority],
   });
 
   readonly statuses: TaskStatusVisuals[] = TASK_STATUS_VISUALS;

@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-  משימה חדשה
+  {{ isEditMode ? 'עריכת משימה' : 'משימה חדשה' }}
   <button class="close-btn" mat-icon-button mat-dialog-close>
     <mat-icon>close</mat-icon>
   </button>
@@ -74,7 +74,7 @@
   <button mat-flat-button class="submit-btn"
           form="task-form" type="submit"
           (click)="onSubmit()" [disabled]="form.invalid">
-    צור משימה
+    {{ isEditMode ? 'שמור' : 'צור משימה' }}
   </button>
   <button mat-stroked-button class="cancel-btn" type="button" (click)="onCancel()">ביטול</button>
  

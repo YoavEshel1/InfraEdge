@@ -82,6 +82,13 @@ mat-divider {
   justify-content: space-between;
 }
 
+.card-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
 .status-field {
   // Shrink the Material form-field to a compact size
   width: auto;
@@ -115,6 +122,19 @@ mat-divider {
   height: 30px;
 
   &:hover { color: $danger-hover; }
+
+  // Remove the Material ripple circle on hover
+  ::ng-deep .mat-mdc-button-persistent-ripple,
+  ::ng-deep .mat-ripple { display: none; }
+}
+
+.edit-btn {
+  color: $border-faint;
+  transition: color 200ms ease;
+  width: 30px;
+  height: 30px;
+
+  &:hover { color: $brand-primary; }
 
   // Remove the Material ripple circle on hover
   ::ng-deep .mat-mdc-button-persistent-ripple,

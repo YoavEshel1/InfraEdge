@@ -7,17 +7,19 @@ import { MatDivider } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Task, TaskStatus } from '../models/task.model';
 import type { TaskStatusVisuals } from '../models/task-status-visuals.model';
 import { TaskService } from '../task.service';
 import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import { TaskModalComponent } from '../task-modal/task-modal.component';
 import { TASK_STATUS_VISUALS, PRIORITY_FILTERS } from '../task-consts';
 
 @Component({
   selector: 'app-task-card',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgClass, MatButtonModule, MatDivider, MatFormFieldModule, MatIconModule, MatSelectModule],
+  imports: [NgClass, MatButtonModule, MatDivider, MatFormFieldModule, MatIconModule, MatSelectModule, MatTooltipModule],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss',
 })
@@ -40,6 +42,23 @@ export class TaskCardComponent {
 
   onStatusChange(status: TaskStatus): void {
     this.taskService.updateTask(this.task().id, { status }).subscribe();
+  }
+
+  onEdit(): void {
+    this.dialog
+      .open(TaskModalComponent, {
+        width: '580px',
+        panelClass: 'rounded-dialog',
+        direction: 'rtl',
+        data: { task: this.task() },
+      })
+      .afterClosed()
+      //end the subscription when the component is destroyed to avoid memory leaks  
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) => {
+        if (!result) return;
+        this.taskService.updateTask(this.task().id, result).subscribe();
+      });
   }
 
   onDelete(): void {

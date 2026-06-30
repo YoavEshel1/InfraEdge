@@ -21,9 +21,15 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-icon-button class="delete-btn" 
-    matTooltip="מחק משימה" (click)="onDelete()" aria-label="מחק משימה">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="card-actions">
+      <button mat-icon-button class="edit-btn"
+        matTooltip="ערוך משימה" (click)="onEdit()" aria-label="ערוך משימה">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button class="delete-btn"
+        matTooltip="מחק משימה" (click)="onDelete()" aria-label="מחק משימה">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
