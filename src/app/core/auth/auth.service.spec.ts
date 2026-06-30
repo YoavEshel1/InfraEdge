@@ -44,10 +44,14 @@ describe('AuthService', () => {
     localStorage.clear();
   });
 
+  // Tests: that TestBed can instantiate the service without errors.
+  // Expected: the injected AuthService instance is truthy (not null/undefined).
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
+  // Tests: the initial state of the service when no session is stored in localStorage.
+  // Expected: currentUser is null, isAuthenticated is false, and token is null.
   it('should start unauthenticated when localStorage is empty', () => {
     // All derived auth signals must reflect the default unauthenticated state
     expect(service.currentUser()).toBeNull();
@@ -55,6 +59,8 @@ describe('AuthService', () => {
     expect(service.token()).toBeNull();
   });
 
+  // Tests: that the service re-hydrates its auth signals from a persisted localStorage entry on construction.
+  // Expected: currentUser, isAuthenticated, and token all reflect the stored user without any HTTP call.
   it('should restore session from localStorage on init', () => {
     // Seed localStorage before re-bootstrapping so loadFromStorage() picks it up
     localStorage.setItem('currentUser', JSON.stringify(MOCK_USER));
@@ -70,6 +76,8 @@ describe('AuthService', () => {
   });
 
   describe('handleLogin()', () => {
+    // Tests: the happy-path login flow where the email and password both match a user returned by the API.
+    // Expected: loginIsLoading flips to true during the request, then signals are set and localStorage is populated on success.
     it('should set currentUser signal and persist to localStorage on success', () => {
       service.handleLogin({ email: 'alice@example.com', password: 'alice123' });
 
@@ -87,6 +95,8 @@ describe('AuthService', () => {
       expect(localStorage.getItem('currentUser')).toBe(JSON.stringify(MOCK_USER));
     });
 
+    // Tests: login failure when the email exists in the API response but the submitted password is incorrect.
+    // Expected: loginError is set to the Hebrew error message, isAuthenticated stays false, and loading stops.
     it('should set loginError when password does not match', () => {
       // Server returns the user but the client-side password comparison fails in the map operator
       service.handleLogin({ email: 'alice@example.com', password: 'wrongpassword' });
@@ -97,6 +107,8 @@ describe('AuthService', () => {
       expect(service.loginIsLoading()).toBe(false);
     });
 
+    // Tests: login failure when the API returns an empty array (email address not registered).
+    // Expected: loginError is set to the Hebrew error message and loading stops; the user remains unauthenticated.
     it('should set loginError when no user matches the email', () => {
       // Server returns an empty array — no account exists for this email
       service.handleLogin({ email: 'unknown@example.com', password: 'pass' });
@@ -108,6 +120,8 @@ describe('AuthService', () => {
   });
 
   describe('logout()', () => {
+    // Tests: that logout() fully clears an active session from both in-memory signals and persistent storage.
+    // Expected: currentUser is null, isAuthenticated is false, token is null, and the localStorage entry is removed.
     it('should clear currentUser signal and localStorage', () => {
       // Arrange: manually seed an authenticated state
       service.currentUser.set(MOCK_USER);

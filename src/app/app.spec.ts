@@ -10,6 +10,8 @@ describe('App', () => {
     }).compileComponents();
   });
 
+  // Tests: that Angular can compile and instantiate the root App component without errors.
+  // Expected: the created component instance is truthy (not null/undefined).
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
     expect(fixture.componentInstance).toBeTruthy();

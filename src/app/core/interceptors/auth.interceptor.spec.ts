@@ -27,6 +27,8 @@ describe('authInterceptor', () => {
 
   afterEach(() => httpMock.verify());
 
+  // Tests: that the interceptor injects a Bearer Authorization header into every outgoing HTTP request when AuthService has a token.
+  // Expected: the intercepted request carries an 'Authorization: Bearer tok-alice-a1b2c3' header.
   it('should attach Authorization header when a token is present', () => {
     setup('tok-alice-a1b2c3');
     httpClient.get('/api/tasks').subscribe();
@@ -36,6 +38,8 @@ describe('authInterceptor', () => {
     req.flush([]);
   });
 
+  // Tests: that the interceptor leaves the request unmodified when AuthService has no token (unauthenticated state).
+  // Expected: the intercepted request does not contain an 'Authorization' header.
   it('should NOT attach Authorization header when token is null', () => {
     setup(null);
     httpClient.get('/api/tasks').subscribe();
