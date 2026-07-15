@@ -29,6 +29,8 @@ import { MatDividerModule } from '@angular/material/divider';
     TaskCardComponent,
     MatDividerModule
   ],
+  providers: [TaskService], //since the board component is a parent of 
+  //the task card component,  they share the same taskService and it is a singletone for both of them
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })

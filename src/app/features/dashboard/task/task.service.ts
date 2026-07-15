@@ -6,7 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { CreateTaskDto, Priority, Task, TaskStatus } from './models/task.model';
 import { AuthService } from '../../../core/auth/auth.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TaskService {
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
