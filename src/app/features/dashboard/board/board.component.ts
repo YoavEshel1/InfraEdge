@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMPTY, filter, switchMap } from 'rxjs';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,7 +35,7 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent {
   private readonly taskService = inject(TaskService);
   private readonly authService = inject(AuthService);
   private readonly dialog = inject(MatDialog);
@@ -54,10 +55,12 @@ export class BoardComponent implements OnInit {
   readonly priorityFilters = PRIORITY_FILTERS;
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────
-  ngOnInit(): void {
-    this.taskService.loadTasks().subscribe({
-      error: (err: Error) => console.error('שגיאה בטעינת המשימות', err),
-    });
+  constructor() {
+    this.taskService.loadTasks()
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        error: (err: Error) => console.error('שגיאה בטעינת המשימות', err),
+      });
   }
 
   // ── Derived helpers ────────────────────────────────────────────────────────
@@ -99,14 +102,18 @@ export class BoardComponent implements OnInit {
         data: { status }
       })
       .afterClosed()
-      //end the subscription when the component is destroyed to avoid memory leaks
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (!result) return;
-        const userId = this.currentUser()?.id;
-        if (!userId) return;
-        this.taskService.createTask({ ...result, userId }).subscribe();
-      });
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        // Ensure the result is not null or undefined
+        filter((result): result is NonNullable<typeof result> => !!result),
+        switchMap((result) => {
+          const userId = this.currentUser()?.id;
+          if (!userId) return EMPTY;
+          // Create a new task with the provided result and userId  
+          return this.taskService.createTask({ ...result, userId });
+        }),
+      )
+      .subscribe();
   }
 
   logout(): void {
